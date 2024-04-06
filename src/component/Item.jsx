@@ -9,8 +9,8 @@ const item = {
   textAlign: "-webkit-center",
 };
 const styleImage = {
-  height: "200px",
-  width: "200px",
+  height: "100px",
+  width: "100px",
   marginBottom: "20px",
 };
 

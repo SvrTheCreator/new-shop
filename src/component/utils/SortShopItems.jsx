@@ -10,8 +10,8 @@ import ShopContext from "../../context/shop-context";
 const sortShop = {
   paddingBottom: "30px",
   cursor: "pointer",
-  margin: "0% auto",
-  maxWidth: "70%",
+  // margin: "0% auto",
+  // maxWidth: "70%",
   width: "100vw",
 };
 
