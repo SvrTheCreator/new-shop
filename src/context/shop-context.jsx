@@ -1,7 +1,7 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "antd";
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 
 const ShopContext = createContext({
   data: [],
@@ -53,11 +53,19 @@ export function ShopContextProvider({ children }) {
       label: (
         <Link to="/">
           <Button onClick={showModal} type="default" size="large">
-            <ShoppingCartOutlined style={{ fontSize: "25px" }} />
+            <ShoppingCartOutlined style={{ fontSize: "20px" }} />
           </Button>
         </Link>
       ),
       key: "shopping-cart ",
+    },
+    {
+      label: (
+        <Link to="/authorization">
+          <UserOutlined style={{ fontSize: "20px" }} />
+        </Link>
+      ),
+      key: "authorization",
     },
   ];
 

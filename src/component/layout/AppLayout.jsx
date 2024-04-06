@@ -8,7 +8,9 @@ import { Routes, Route } from "react-router-dom";
 import AppContent from "./AppContent";
 import ContactsNav from "../Contacts";
 import Items from "../Items";
-// import SortShopItems from "../utils/SortShopItems";
+import Authorization from "../Authorization";
+import Login from "../authorization/Login";
+import Registration from "../authorization/Registration";
 
 const layoutStyle = {
   minHeight: "100vh",
@@ -74,6 +76,10 @@ export default function Applayout() {
           element={<Items onAdd={addToShoppingCart} />}
         />
         <Route path="/contacts" element={<ContactsNav />} />
+        <Route path="/authorization" element={<Authorization />}>
+          <Route path="login" element={<Login />} />
+          <Route path="registration" element={<Registration />} />
+        </Route>
       </Routes>
       <AppFooter />
     </Layout>
