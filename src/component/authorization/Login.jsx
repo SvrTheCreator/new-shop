@@ -3,9 +3,10 @@ import { Button, Form, Input } from "antd";
 
 const login = {
   marginTop: "30px",
-  //   textAlign: "right",
+  textAlign: "right",
   height: "100vh",
   maxWidth: "600",
+  padding: "0 20px 0 20px",
 };
 
 export default function Login() {

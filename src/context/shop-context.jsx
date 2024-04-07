@@ -1,7 +1,11 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "antd";
-import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  ShoppingCartOutlined,
+  UserOutlined,
+  HomeOutlined,
+} from "@ant-design/icons";
 
 const ShopContext = createContext({
   data: [],
@@ -15,20 +19,60 @@ export function ShopContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [shoppingCart, setShoppingCart] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalCartOpen, setIsModalCartOpen] = useState(false);
   const [currentItems, setCurrentItems] = useState([]);
+  const [showFullItem, setShowFullItem] = useState(false);
+  const [fullItem, setFullItem] = useState({});
+  const [isModalForItemOpen, setIsModaForItemlOpen] = useState(false);
+  const [isModalSoloItemOpen, setIsModalSoloItemOpen] = useState(false);
 
-  const showModal = () => {
-    setIsModalOpen(true);
+  const showModalCart = () => {
+    setIsModalCartOpen(true);
   };
   const handleOk = () => {
-    setIsModalOpen(false);
+    setIsModalCartOpen(false);
   };
   const handleCancel = () => {
-    setIsModalOpen(false);
+    setIsModalCartOpen(false);
+  };
+  // const deleteFromShoppingCart = (id) => {
+  //   let del = shoppingCart.filter((e) => e.id !== id);
+  //   setShoppingCart(del);
+  // };
+
+  // const addToShoppingCart = (item) => {
+  //   let isInCart = false;
+  //   shoppingCart.forEach((el) => {
+  //     if (el.id === item.id) isInCart = true;
+  //     setShowFullItem(!showFullItem);
+  //     setIsModalSoloItemOpen(!isModalSoloItemOpen);
+  //   });
+  //   if (!isInCart) {
+  //     setShoppingCart([item, ...shoppingCart]);
+  //     setShowFullItem(!showFullItem);
+  //     setIsModalSoloItemOpen(!isModalSoloItemOpen);
+  //   }
+  // };
+  const handleCancelOnSoloItem = () => {
+    setShowFullItem(!showFullItem);
+    setIsModalSoloItemOpen(!isModalSoloItemOpen);
+  };
+  const onShowItem = (item) => {
+    setFullItem(item);
+    setShowFullItem(!showFullItem);
+    setIsModalSoloItemOpen(!isModalSoloItemOpen);
+    handleCancelOnSoloItem(!isModalSoloItemOpen);
   };
 
   const category = [
+    {
+      label: (
+        <Link to="/">
+          <HomeOutlined style={{ fontSize: "20px" }} />
+        </Link>
+      ),
+      key: "/",
+    },
     {
       label: <Link to="/all">All</Link>,
       key: "all",
@@ -52,7 +96,7 @@ export function ShopContextProvider({ children }) {
     {
       label: (
         <Link to="/">
-          <Button onClick={showModal} type="default" size="large">
+          <Button onClick={showModalCart} type="default" size="large">
             <ShoppingCartOutlined style={{ fontSize: "20px" }} />
           </Button>
         </Link>
@@ -90,12 +134,24 @@ export function ShopContextProvider({ children }) {
         setData,
         shoppingCart,
         setShoppingCart,
-        isModalOpen,
+        isModalCartOpen,
         handleOk,
         handleCancel,
         category,
         currentItems,
         setCurrentItems,
+        showFullItem,
+        setShowFullItem,
+        fullItem,
+        setFullItem,
+        isModalForItemOpen,
+        setIsModaForItemlOpen,
+        isModalSoloItemOpen,
+        setIsModalSoloItemOpen,
+        // deleteFromShoppingCart,
+        // addToShoppingCart,
+        onShowItem,
+        handleCancelOnSoloItem,
       }}
     >
       {children}

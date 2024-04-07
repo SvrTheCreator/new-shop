@@ -7,22 +7,27 @@ import SortShopItems from "./utils/SortShopItems";
 
 const row = {
   margin: "0% auto",
-  marginTop: "50px",
-  marginBottom: "50px",
+  padding: "20px",
   maxWidth: "70%",
   width: "100vw",
-  textAlign: "center",
+  textAlign: "start",
 };
 
 export default function Items(props) {
   const { currentItems } = useContext(ShopContext);
 
   return (
-    <div>
-      <Row style={row} gutter={[5, 5]}>
-        <SortShopItems />
+    <div style={row}>
+      <SortShopItems />
+      <Row gutter={[20, 20]}>
         {currentItems.map((element) => (
-          <Item key={element.id} item={element} onAdd={props.onAdd} />
+          <Item
+            // showModalSoloItem={props.showModalSoloItem}
+            // onShowItem={props.onShowItem}
+            key={element.id}
+            item={element}
+            onAdd={props.onAdd}
+          />
         ))}
       </Row>
     </div>

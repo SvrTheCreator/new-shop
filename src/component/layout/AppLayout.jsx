@@ -11,6 +11,7 @@ import Items from "../Items";
 import Authorization from "../Authorization";
 import Login from "../authorization/Login";
 import Registration from "../authorization/Registration";
+import ShowFullItem from "../ShowFullItem";
 
 const layoutStyle = {
   minHeight: "100vh",
@@ -19,17 +20,23 @@ const contentStyle = {
   margin: "0% auto",
   maxWidth: "70%",
   width: "100vw",
-  // minHeight: '100vh',
+  // minHeight: "100vh",
   textAlign: "center",
 };
 
 export default function Applayout() {
   const {
     loading,
+    showFullItem,
+    fullItem,
+    setShowFullItem,
+    isModalSoloItemOpen,
+    setIsModalSoloItemOpen,
+    onShowItem,
     shoppingCart,
     setShoppingCart,
-    currentItems,
-    setCurrentItems,
+    // deleteFromShoppingCart,
+    // addToShoppingCart,
   } = useContext(ShopContext);
 
   if (loading) {
@@ -39,7 +46,7 @@ export default function Applayout() {
         indicator={
           <LoadingOutlined
             style={{
-              fontSize: 80,
+              fontSize: 300,
             }}
             spin
           />
@@ -47,6 +54,7 @@ export default function Applayout() {
       />
     );
   }
+
   const deleteFromShoppingCart = (id) => {
     let del = shoppingCart.filter((e) => e.id !== id);
     setShoppingCart(del);
@@ -56,24 +64,42 @@ export default function Applayout() {
     let isInCart = false;
     shoppingCart.forEach((el) => {
       if (el.id === item.id) isInCart = true;
+      setShowFullItem(!showFullItem);
+      setIsModalSoloItemOpen(!isModalSoloItemOpen);
     });
     if (!isInCart) {
       setShoppingCart([item, ...shoppingCart]);
+      setShowFullItem(!showFullItem);
+      setIsModalSoloItemOpen(!isModalSoloItemOpen);
     }
   };
-
   return (
     <Layout style={layoutStyle}>
       <AppHeader onDel={deleteFromShoppingCart} />
-      {/* <SortShopItems /> */}
+      {showFullItem && (
+        <ShowFullItem
+          onShowItem={onShowItem}
+          onAdd={addToShoppingCart}
+          item={fullItem}
+        />
+      )}
       <Routes style={contentStyle}>
         <Route path="/" element={<AppContent />} />
-        <Route path="/all" element={<Items onAdd={addToShoppingCart} />} />
-        <Route path="/man" element={<Items onAdd={addToShoppingCart} />} />
-        <Route path="/jewelery" element={<Items onAdd={addToShoppingCart} />} />
+        <Route
+          path="/all"
+          element={<Items onShowItem={onShowItem} onAdd={addToShoppingCart} />}
+        />
+        <Route
+          path="/man"
+          element={<Items onShowItem={onShowItem} onAdd={addToShoppingCart} />}
+        />
+        <Route
+          path="/jewelery"
+          element={<Items onShowItem={onShowItem} onAdd={addToShoppingCart} />}
+        />
         <Route
           path="/electronics"
-          element={<Items onAdd={addToShoppingCart} />}
+          element={<Items onShowItem={onShowItem} onAdd={addToShoppingCart} />}
         />
         <Route path="/contacts" element={<ContactsNav />} />
         <Route path="/authorization" element={<Authorization />}>
@@ -81,6 +107,7 @@ export default function Applayout() {
           <Route path="registration" element={<Registration />} />
         </Route>
       </Routes>
+
       <AppFooter />
     </Layout>
   );
