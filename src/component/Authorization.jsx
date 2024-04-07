@@ -1,8 +1,6 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
-import { Menu, Typography } from "antd";
-
-// const { Title } = Typography;
+import { Outlet, Link } from "react-router-dom";
+import { Menu } from "antd";
 
 const authorization = {
   display: "flex",

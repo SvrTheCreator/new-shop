@@ -1,80 +1,28 @@
-import React, { useState } from "react";
-import {
-  AutoComplete,
-  Button,
-  Cascader,
-  Checkbox,
-  Col,
-  Form,
-  Input,
-  InputNumber,
-  Row,
-  Select,
-} from "antd";
+import React from "react";
+import { Button, Form, Input } from "antd";
 
-const { Option } = Select;
-const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 8,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 16,
-    },
-  },
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
+const register = {
+  marginTop: "30px",
+  textAlign: "right",
+  height: "100vh",
+  maxWidth: "600",
+  padding: "0 20px 0 20px",
 };
 
 export default function Registration() {
   const [form] = Form.useForm();
+
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    console.log(values);
   };
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="+7">+7</Option>
-      </Select>
-    </Form.Item>
-  );
 
   return (
     <Form
-      {...formItemLayout}
+      // {...formItemLayout}
       form={form}
       name="register"
       onFinish={onFinish}
-      //   initialValues={{
-      //     prefix: "+7",
-      //   }}
-      style={{
-        maxWidth: 600,
-        marginTop: "30px",
-        height: "100vh",
-      }}
+      style={register}
       scrollToFirstError
     >
       <Form.Item
@@ -109,7 +57,7 @@ export default function Registration() {
       </Form.Item>
 
       <Form.Item
-        name="confirm password"
+        name="password confirm"
         label="Confirm Password"
         dependencies={["password"]}
         hasFeedback
@@ -151,7 +99,7 @@ export default function Registration() {
         />
       </Form.Item>
 
-      <Form.Item
+      {/* <Form.Item
         name="Date of Birth"
         label="Date of Birth"
         // label="DD.MM.YY"
@@ -163,50 +111,11 @@ export default function Registration() {
         ]}
       >
         <Input placeholder="DD.MM.YY" />
-      </Form.Item>
-
-      {/* <Form.Item
-        name="residence"
-        label="Habitual Residence"
-        style={{
-          width: "100%",
-        }}
-        rules={[
-          {
-            required: true,
-            message: "Please select your habitual residence!",
-          },
-        ]}
-      >
-        <Input />
       </Form.Item> */}
 
-      {/* <Form.Item
-        label="Captcha"
-        extra="We must make sure that your are a human."
+      <Form.Item
+      // {...tailFormItemLayout}
       >
-        <Row gutter={8}>
-          <Col span={12}>
-            <Form.Item
-              name="captcha"
-              noStyle
-              rules={[
-                {
-                  required: true,
-                  message: "Please input the captcha you got!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Button>Get captcha</Button>
-          </Col>
-        </Row>
-      </Form.Item> */}
-
-      <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
           Register
         </Button>
