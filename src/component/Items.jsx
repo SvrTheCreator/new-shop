@@ -21,13 +21,7 @@ export default function Items(props) {
       <SortShopItems />
       <Row gutter={[20, 20]}>
         {currentItems.map((element) => (
-          <Item
-            // showModalSoloItem={props.showModalSoloItem}
-            // onShowItem={props.onShowItem}
-            key={element.id}
-            item={element}
-            onAdd={props.onAdd}
-          />
+          <Item key={element.id} item={element} onAdd={props.onAdd} />
         ))}
       </Row>
     </div>
