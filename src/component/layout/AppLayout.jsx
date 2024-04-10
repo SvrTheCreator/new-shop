@@ -20,7 +20,6 @@ const contentStyle = {
   margin: "0% auto",
   maxWidth: "70%",
   width: "100vw",
-  // minHeight: "100vh",
   textAlign: "center",
 };
 
@@ -35,8 +34,6 @@ export default function Applayout() {
     onShowItem,
     shoppingCart,
     setShoppingCart,
-    // deleteFromShoppingCart,
-    // addToShoppingCart,
   } = useContext(ShopContext);
 
   if (loading) {
